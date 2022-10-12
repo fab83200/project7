@@ -37,14 +37,14 @@ def upload_file(file, variable):
     
     Example
     -------
-    >>> upload_file(application_train_lite.csv, application_train)
+    >>> upload_file("application_train_lite.csv", "application_train")
     """
     variable = pd.read_csv(file, sep=",")
     for tr in variable.describe(include='object').columns:
         variable[tr]=variable[tr].fillna((variable[tr].mode()))
     for ci in variable.describe().columns:
         variable[ci]=variable[ci].fillna((variable[ci].median()))
-    return variable
+    return application_train
     
 # This is the main train table, with TARGET
 upload_file("application_train_lite.csv", "application_train")
