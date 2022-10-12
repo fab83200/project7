@@ -76,6 +76,7 @@ idx = random.randint(1, len(x_valid))
 
 random_element = x_valid.loc[idx]
 
+st.markdown("### Select your desired loan parameters")
 with st.form(key="my_form"):
     col1, buffer_column = st.columns([2, .5])
     with col1:
@@ -137,11 +138,11 @@ explainer = lime_tabular.LimeTabularExplainer(np.array(x_train), mode="classific
                                               class_names=np.array(['normal', 'default']),
                                               feature_names=np.array(feature_names))
 
-if st.button("Choose an random sample:"):
-  st.write(f"The chosen sample from the dataset is the element: {idx}")
-  st.write("Prediction : ", y_pred_lr_idx)
-  st.write("Actual :     ", y_valid.iloc[idx])
-  st.write(f'Probablility of being a Defaulter: {probability:.2%}')
+#if st.button("Choose an random sample:"):
+st.write(f"The chosen parameters give the following results: {idx}")
+st.write("Prediction : ", y_pred_lr_idx)
+#st.write("Actual :     ", y_valid.iloc[idx])
+st.write(f'Probablility of being a Defaulter: {probability:.2%}')
 
 
 if st.button("Explain Results"):
@@ -150,6 +151,4 @@ if st.button("Explain Results"):
         # Display explainer HTML object
         components.html(explanation.as_html(), height=800)
 
-        
-for items in st.session_state.items():                                          # to display all pairs (or .keys() or .values() for individual display)
-  st.write(items)
+       
