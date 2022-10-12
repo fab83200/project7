@@ -8,17 +8,21 @@ Follow the steps at the [Anaconda installation page](https://docs.anaconda.com/a
 
 1. Start Anaconda "Getting Started" page
 2. Click the "▶" icon next to your new environment (root or sth else) and then "Open terminal":
+
 <img src="https://camo.githubusercontent.com/2e4ec1070ef05f008db123248dc0ac9d510f2c43c0a4ab06db147e056f1cb00d/68747470733a2f2f692e737461636b2e696d6775722e636f6d2f45696946632e706e67" width="400"/>
-4. In the terminal that appears, type:
+
+3. In the terminal that appears, type:
 ```bash
 pip install streamlit
 ```
+
 4. Finish the installation. Copy paste the following code:
 ```bash
 git clone https://github.com/fab83200/project7.git
 cd project7
 pip install -r requirements.txt
 ```
+NOTA: _All needed libraries to excute the Python code should be included in the file `requirements.txt` in [my repository](https://github.com/fab83200/project7)_.
 
 ## Edit the app to deploy
 
