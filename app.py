@@ -18,7 +18,13 @@ st.markdown(f"<h2 style='text-align: center;'><b>{title_text}</b></h2>", unsafe_
 st.text("")
 
 # This is the main train table, with TARGET
-app_train = pd.read_csv("../application_train_lite.csv", sep=",")
+
+#uploaded_file = "Website_Results.csv"
+#df = pd.read_csv(uploaded_file)
+
+
+#uploaded_file = st.file_uploader("application_train_lite.csv", type=".csv")
+app_train = pd.read_csv("application_train_lite.csv", sep=",")
 for tr in app_train.describe(include='object').columns:
     app_train[tr]=app_train[tr].fillna((app_train[tr].mode()))
 for ci in app_train.describe().columns:
