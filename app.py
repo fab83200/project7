@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import random
+import scipy.stats
+from scipy.stats import norm
+import altair as alt
 
 #from sklearn.preprocessing import LabelEncoder
 #from sklearn.preprocessing import StandardScaler
