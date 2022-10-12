@@ -75,24 +75,35 @@ idx = random.randint(1, len(x_valid))
 #idx = 18530
 
 random_element = x_valid.loc[idx]
+
+col1, buffer_column = st.columns([2, .5])
+with col1:
+  amt_credit_widget = st.number_input("What is the desired loan amount",    # Name of the number_input
+                           key='amt_credit',                                # Name of the variable for the data
+                           on_change=None)                                  # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
+
+
 #amt_credit = 1248030.0
 #amt_annuity = 41377.5
 #days_birth = -11215.0
 #ext_source_1 = 0.5059979305057544
 #ext_source_3 = 0.2327247762679433
 
-amt_credit = st.slider('Select a loan amount:', x['AMT_CREDIT'].min(), x['AMT_CREDIT'].max(), key='my_slider1', value=float(x_valid.loc[idx]['AMT_CREDIT']))
+#amt_credit = st.slider('Select a loan amount:', x['AMT_CREDIT'].min(), x['AMT_CREDIT'].max(), key='my_slider1', value=float(x_valid.loc[idx]['AMT_CREDIT']))
 #amt_annuity = st.slider('Select a yearly repayment:', x['AMT_ANNUITY'].min(), x['AMT_ANNUITY'].max(), key='my_slider2', value=60000.0)
 #days_birth = st.slider('Select a number of days:', x['DAYS_BIRTH'].min(), x['DAYS_BIRTH'].max(), key='my_slider3', value=11000)
 #ext_source_1 = st.slider('Select external source 1:', x['EXT_SOURCE_1'].min(), x['EXT_SOURCE_1'].max(), key='my_slider4', value=0.5)
 #ext_source_3 = st.slider('Select external source 3:', x['EXT_SOURCE_3'].min(), x['EXT_SOURCE_3'].max(), key='my_slider5', value=0.2)
 
-random_element[6] = amt_credit
-#random_element[7] = amt_annuity
-#random_element[15] = days_birth
-#random_element[39] = ext_source_1
-#random_element[41] = ext_source_3
-#payment_rate = amt_annuity / amt_credit
+button = st.button("Update Values")
+
+if button:                                                                      # when the button is activated
+    random_element[6] = amt_credit
+    #random_element[7] = amt_annuity
+    #random_element[15] = days_birth
+    #random_element[39] = ext_source_1
+    #random_element[41] = ext_source_3
+    #payment_rate = amt_annuity / amt_credit
     
 # standardizes and normalizes the x data
 std_scale = StandardScaler().fit(x_train)                       	              
