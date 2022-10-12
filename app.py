@@ -108,4 +108,20 @@ y_pred_lr = lr.predict(x_valid)                                                 
 y_pred_lr_idx  = lr.predict(random_element)[0]
 probability  = lr.predict_proba(random_element)[0, 1]
     
-probability
+# Lime Instanciation
+explainer = lime_tabular.LimeTabularExplainer(np.array(x_train), mode="classification",
+                                              class_names=np.array(['normal', 'default']),
+                                              feature_names=np.array(feature_names))
+
+if st.button("Choose an random sample:"):
+  st.write(f"The chosen sample from the dataset is the element: {idx}")
+  st.write("Prediction : ", y_pred_lr_idx)
+  st.write("Actual :     ", y_valid.iloc[idx])
+  st.write(f'Probablility of being a Defaulter: {probability:.2%}')
+
+
+if st.button("Explain Results"):
+    with st.spinner('Calculating...'):
+        explanation = explainer.explain_instance(x_valid[idx], lr.predict_proba, num_features=10)
+        # Display explainer HTML object
+        components.html(explanation.as_html(), height=800)
