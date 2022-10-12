@@ -1,6 +1,25 @@
 # Welcome to Fabrice's Project 7!
 
-Edit `/app.py` to customize this app to your heart's desire. :heart:
+## Create a new environment with Streamlit
+
+1. Start Anaconda "Getting Started" page
+2. Click the "▶" icon next to your new environment (root or sth else) and then "Open terminal":
+3. In the terminal that appears, type:
+```bash
+pip install streamlit
+```
+4. Finish the installation. Copy paste the following code:
+```bash
+git clone https://github.com/fab83200/project7.git
+cd project7
+pip install -r requirements.txt
+```
+
+## Edit the app to deploy
+
+* Edit `/app.py` to customize this app to your heart's desire. :heart:
+
+## Deploy the app
 
 To deploy the app, open this [link](https://share.streamlit.io).
 
@@ -11,20 +30,5 @@ Branch:
     main
 Main file path:
     app.py
-Advanced settings...
 
 Finally, click on `Deploy`
-
-## Create a new environment with Streamlit
-
-1. Start Anaconda "Getting Started" page
-2. Click the "▶" icon next to your new environment (root or sth else) and then "Open terminal":
-
-
-## Installation :balloon:
-
-```bash
-git clone https://github.com/fab83200/project7.git
-cd project7
-pip install -r requirements.txt
-```
