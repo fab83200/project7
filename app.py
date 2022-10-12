@@ -91,7 +91,7 @@ with st.form(key="my_form"):
                                help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
                                on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
     with col1:
-      days_birth_widget = st.number_input("What is the desired loan amount",        # Name of the number_input
+      days_birth_widget = st.number_input("Number of days",                         # Name of the number_input
                                key='days_birth',                                    # Name of the variable for the data
                                value=x_valid.loc[idx]['DAYS_BIRTH'],                # Sets the default value
                                help=f"Choose a number between {x['DAYS_BIRTH'].min()} and {x['DAYS_BIRTH'].max()}", 
