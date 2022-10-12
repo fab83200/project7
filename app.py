@@ -116,7 +116,7 @@ with st.form(key="my_form"):
     random_element[41] = st.session_state.ext_source_3
     payment_rate = st.session_state.amt_annuity / st.session_state.amt_credit
     
-    button = st.button("Update Values")
+    submit_button = st.form_submit_button(label="Submit")
     
 # standardizes and normalizes the x data
 std_scale = StandardScaler().fit(x_train)                       	              
