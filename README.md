@@ -18,7 +18,7 @@ Finally, click on `Deploy`
 ## Installation :balloon:
 
 ```bash
-git clone https://github.com/streamlit/example-app-ab-testing.git
-cd example-app-ab-testing
+git clone https://github.com/fab83200/project7.git
+cd project7
 pip install -r requirements.txt
 ```
