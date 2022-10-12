@@ -81,31 +81,31 @@ with col1:
   amt_credit_widget = st.number_input("What is the desired loan amount:",       # Name of the number_input
                            key='amt_credit',                                    # Name of the variable for the data
                            value=float(x_valid.loc[idx]['AMT_CREDIT']),         # Sets the default value
-                           help=f"Choose a number between {x['AMT_CREDIT'].min()} and {x['AMT_CREDIT'].max()}", 
+                           #help=f"Choose a number between {x['AMT_CREDIT'].min()} and {x['AMT_CREDIT'].max()}", 
                            on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
 with col1:
   amt_annuity_widget = st.number_input("What is the desired yearly repayment:", # Name of the number_input
                            key='amt_annuity',                                   # Name of the variable for the data
                            value=float(x_valid.loc[idx]['AMT_ANNUITY'])         # Sets the default value
-                           help=f"Choose a number between {x['AMT_ANNUITY'].min()} and {x['AMT_ANNUITY'].max()}", 
+                           #help=f"Choose a number between {x['AMT_ANNUITY'].min()} and {x['AMT_ANNUITY'].max()}", 
                            on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
 with col1:
   days_birth_widget = st.number_input("What is the desired loan amount",        # Name of the number_input
                            key='days_birth',                                    # Name of the variable for the data
                            value=x_valid.loc[idx]['DAYS_BIRTH']                 # Sets the default value
-                           help=f"Choose a number between {x['DAYS_BIRTH'].min()} and {x['DAYS_BIRTH'].max()}", 
+                           #help=f"Choose a number between {x['DAYS_BIRTH'].min()} and {x['DAYS_BIRTH'].max()}", 
                            on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
 with col1:
  ext_source_1_widget = st.number_input("What is the ext_source_1",              # Name of the number_input
                            key='ext_source_1',                                  # Name of the variable for the data
                            value=float(x_valid.loc[idx]['EXT_SOURCE_1'])        # Sets the default value
-                           help=f"Choose a number between {x['EXT_SOURCE_1'].min()} and {x['EXT_SOURCE_1'].max()}", 
+                           #help=f"Choose a number between {x['EXT_SOURCE_1'].min()} and {x['EXT_SOURCE_1'].max()}", 
                            on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
 with col1:
   ext_source_3_widget = st.number_input("What is the ext_source_3",             # Name of the number_input
                            key='ext_source_3',                                  # Name of the variable for the data
                            value=float(x_valid.loc[idx]['EXT_SOURCE_3'])        # Sets the default value
-                           help=f"Choose a number between {x['EXT_SOURCE_3'].min()} and {x['EXT_SOURCE_3'].max()}", 
+                           #help=f"Choose a number between {x['EXT_SOURCE_3'].min()} and {x['EXT_SOURCE_3'].max()}", 
                            on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
 
 
