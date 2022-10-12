@@ -1,10 +1,15 @@
 # Welcome to Fabrice's Project 7!
 
+## Install Anaconda
+
+Follow the steps at the [Anaconda installation page](https://docs.anaconda.com/anaconda/install/windows/).
+
 ## Create a new environment with Streamlit
 
 1. Start Anaconda "Getting Started" page
 2. Click the "▶" icon next to your new environment (root or sth else) and then "Open terminal":
-3. In the terminal that appears, type:
+<img src="https://camo.githubusercontent.com/2e4ec1070ef05f008db123248dc0ac9d510f2c43c0a4ab06db147e056f1cb00d/68747470733a2f2f692e737461636b2e696d6775722e636f6d2f45696946632e706e67" width="400"/>
+4. In the terminal that appears, type:
 ```bash
 pip install streamlit
 ```
