@@ -22,7 +22,7 @@ git clone https://github.com/fab83200/project7.git
 cd project7
 pip install -r requirements.txt
 ```
-NOTA: _All needed libraries to excute the Python code should be included in the file `requirements.txt` in [my repository](https://github.com/fab83200/project7)_.
+_NOTA: All needed libraries to excute the Python code should be included in the file `requirements.txt` in [my repository](https://github.com/fab83200/project7)_.
 
 ## Edit the app to deploy
 
