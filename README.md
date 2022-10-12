@@ -15,6 +15,12 @@ Advanced settings...
 
 Finally, click on `Deploy`
 
+## Create a new environment with Streamlit
+
+1. Start Anaconda "Getting Started" page
+2. Click the "▶" icon next to your new environment (root or sth else) and then "Open terminal":
+
+
 ## Installation :balloon:
 
 ```bash
