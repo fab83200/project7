@@ -98,7 +98,7 @@ with col1:
 button = st.button("Update Values")
 
 if button:                                                                      # when the button is activated
-    random_element[6] = amt_credit
+    random_element[6] = st.session_state.amt_credit
     #random_element[7] = amt_annuity
     #random_element[15] = days_birth
     #random_element[39] = ext_source_1
@@ -136,3 +136,7 @@ if st.button("Explain Results"):
         explanation = explainer.explain_instance(x_valid[idx], lr.predict_proba, num_features=10)
         # Display explainer HTML object
         components.html(explanation.as_html(), height=800)
+
+        
+for items in st.session_state.items():                                          # to display all pairs (or .keys() or .values() for individual display)
+  st.write(items)
