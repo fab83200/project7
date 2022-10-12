@@ -81,13 +81,13 @@ random_element = x_valid.loc[idx]
 #ext_source_1 = 0.5059979305057544
 #ext_source_3 = 0.2327247762679433
 
-#amt_credit = st.slider('Select a loan amount:', x['AMT_CREDIT'].min(), x['AMT_CREDIT'].max(), key='my_slider1', value=1200000.0)
+amt_credit = st.slider('Select a loan amount:', x['AMT_CREDIT'].min(), x['AMT_CREDIT'].max(), key='my_slider1', value=x_valid.loc[idx]['AMT_CREDIT'])
 #amt_annuity = st.slider('Select a yearly repayment:', x['AMT_ANNUITY'].min(), x['AMT_ANNUITY'].max(), key='my_slider2', value=60000.0)
 #days_birth = st.slider('Select a number of days:', x['DAYS_BIRTH'].min(), x['DAYS_BIRTH'].max(), key='my_slider3', value=11000)
 #ext_source_1 = st.slider('Select external source 1:', x['EXT_SOURCE_1'].min(), x['EXT_SOURCE_1'].max(), key='my_slider4', value=0.5)
 #ext_source_3 = st.slider('Select external source 3:', x['EXT_SOURCE_3'].min(), x['EXT_SOURCE_3'].max(), key='my_slider5', value=0.2)
 
-#random_element[6] = amt_credit
+random_element[6] = amt_credit
 #random_element[7] = amt_annuity
 #random_element[15] = days_birth
 #random_element[39] = ext_source_1
