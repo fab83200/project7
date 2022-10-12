@@ -47,12 +47,10 @@ def upload_file(file, variable):
     return variable
     
 # This is the main train table, with TARGET
-application_train = upload_file("application_train_lite.csv", "application_train")
+app_train = upload_file("application_train_lite.csv", "application_train")
 
 # This is the main test table, without TARGET
-application_test = upload_file("application_test_lite.csv", "application_test")
-
-application_train
+app_test = upload_file("application_test_lite.csv", "application_test")
 
 # This cell is used to label encode all non numerical features for the `app_train` and `app_test` datasets
 l = LabelEncoder()
