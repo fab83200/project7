@@ -17,15 +17,48 @@ title_text = 'Credit Score API'
 st.markdown(f"<h2 style='text-align: center;'><b>{title_text}</b></h2>", unsafe_allow_html=True)
 st.text("")
 
+def upload_file(file, variable):
+    """upload_file function to load a .csv data file into a DataFrame.
+        If 'object' values for a feature are missing,
+        it is replaced by the mode of that feature (ie. the most common feature).
+        If 'numeric' values for a feature are missing,
+        it is replaced by the median of that feature.
+
+    Parameters
+    ----------
+    file: str
+        The name of the csv file to upload. It must be under the root of the repository.
+    variable: str
+        The name of the variable under which the Dataframe will be stored
+    
+    Returns
+    -------
+    A pandas type DataFrame with no missing values.
+    
+    Example
+    -------
+    >>> upload_file(application_train_lite.csv, application_train)
+    """
+    variable = pd.read_csv(file, sep=",")
+    for tr in variable.describe(include='object').columns:
+        variable[tr]=variable[tr].fillna((variable[tr].mode()))
+    for ci in variable.describe().columns:
+        variable[ci]=variable[ci].fillna((variable[ci].median()))
+    return variable
+    
 # This is the main train table, with TARGET
+upload_file(application_train_lite.csv, application_train)
 
-#uploaded_file = "Website_Results.csv"
-#df = pd.read_csv(uploaded_file)
+# This is the main test table, without TARGET
+upload_file(application_test_lite.csv, application_test)
+
+application_train
 
 
-#uploaded_file = st.file_uploader("application_train_lite.csv", type=".csv")
-app_train = pd.read_csv("application_train_lite.csv", sep=",")
-for tr in app_train.describe(include='object').columns:
-    app_train[tr]=app_train[tr].fillna((app_train[tr].mode()))
-for ci in app_train.describe().columns:
-    app_train[ci]=app_train[ci].fillna((app_train[ci].median()))
+    
+    
+    
+    
+    
+    
+    
