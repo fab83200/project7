@@ -44,7 +44,7 @@ def upload_file(file, variable):
         variable[tr]=variable[tr].fillna((variable[tr].mode()))
     for ci in variable.describe().columns:
         variable[ci]=variable[ci].fillna((variable[ci].median()))
-    return application_train
+    return variable
     
 # This is the main train table, with TARGET
 upload_file("application_train_lite.csv", "application_train")
