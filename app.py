@@ -48,18 +48,66 @@ def upload_file(file, variable):
     
 # This is the main train table, with TARGET
 application_train = upload_file("application_train_lite.csv", "application_train")
-#variable = pd.read_csv("application_train_lite.csv", sep=",")
 
 # This is the main test table, without TARGET
-#upload_file(application_test_lite.csv, application_test)
+application_test = upload_file("application_test_lite.csv", "application_test")
 
 application_train
 
+# This cell is used to label encode all non numerical features for the `app_train` and `app_test` datasets
+l = LabelEncoder()
+for p in app_train.describe(include='object').columns:
+  app_train[p]=l.fit_transform(app_train[p])
+# l = LabelEncoder()
+for q in app_test.describe(include='object').columns:
+  app_test[q]=l.fit_transform(app_test[q])
 
+
+# Prepare the Datasets
+x = app_train.drop(['TARGET', 'SK_ID_CURR'],axis=1)
+y = app_train['TARGET']
+x_train, x_valid, y_train, y_valid = train_test_split(x, y, test_size=.30, random_state=42)
+x_test = app_test.drop(['SK_ID_CURR'],axis=1)
+x_valid = x_valid.reset_index()
+del x_valid['index']
+feature_names = x_train.columns
+
+# Choose a random sample
+idx = random.randint(1, len(x_valid))
+#idx = 18530
+
+random_element = x_valid.loc[idx]
+#amt_credit = 1248030.0
+#amt_annuity = 41377.5
+#days_birth = -11215.0
+#ext_source_1 = 0.5059979305057544
+#ext_source_3 = 0.2327247762679433
+
+#amt_credit = st.slider('Select a loan amount:', x['AMT_CREDIT'].min(), x['AMT_CREDIT'].max(), key='my_slider1', value=1200000.0)
+#amt_annuity = st.slider('Select a yearly repayment:', x['AMT_ANNUITY'].min(), x['AMT_ANNUITY'].max(), key='my_slider2', value=60000.0)
+#days_birth = st.slider('Select a number of days:', x['DAYS_BIRTH'].min(), x['DAYS_BIRTH'].max(), key='my_slider3', value=11000)
+#ext_source_1 = st.slider('Select external source 1:', x['EXT_SOURCE_1'].min(), x['EXT_SOURCE_1'].max(), key='my_slider4', value=0.5)
+#ext_source_3 = st.slider('Select external source 3:', x['EXT_SOURCE_3'].min(), x['EXT_SOURCE_3'].max(), key='my_slider5', value=0.2)
+
+#random_element[6] = amt_credit
+#random_element[7] = amt_annuity
+#random_element[15] = days_birth
+#random_element[39] = ext_source_1
+#random_element[41] = ext_source_3
+#payment_rate = amt_annuity / amt_credit
     
+# standardizes and normalizes the x data
+std_scale = StandardScaler().fit(x_train)                       	              
+x_train = std_scale.transform(x_train)
+x_valid = std_scale.transform(x_valid)
+x_test = std_scale.transform(x_test)
+random_element = std_scale.transform(np.array(random_element).reshape(1, -1))
+
+# Perform a Logistic Regression
+lr = LogisticRegression(max_iter=3000)
+lr.fit(x_train, y_train)                                                        # (215257, 120)   # (215257,)
+y_pred_lr = lr.predict(x_valid)                                                 # (92254,)        # (92254, 120)
+y_pred_lr_idx  = lr.predict(random_element)[0]
+probability  = lr.predict_proba(random_element)[0, 1]
     
-    
-    
-    
-    
-    
+probability
