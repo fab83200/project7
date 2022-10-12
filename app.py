@@ -76,9 +76,7 @@ idx = random.randint(1, len(x_valid))
 
 random_element = x_valid.loc[idx]
 
-
-button = st.button("Update Values")
-if button:                                                                          # when the button is activated
+with st.form(key="my_form"):
     col1, buffer_column = st.columns([2, .5])
     with col1:
       amt_credit_widget = st.number_input("What is the desired loan amount:",       # Name of the number_input
@@ -117,6 +115,8 @@ if button:                                                                      
     random_element[39] = st.session_state.ext_source_1
     random_element[41] = st.session_state.ext_source_3
     payment_rate = st.session_state.amt_annuity / st.session_state.amt_credit
+    
+    button = st.button("Update Values")
     
 # standardizes and normalizes the x data
 std_scale = StandardScaler().fit(x_train)                       	              
