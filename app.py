@@ -47,7 +47,8 @@ def upload_file(file, variable):
     return variable
     
 # This is the main train table, with TARGET
-upload_file("application_train_lite.csv", application_train)
+#upload_file("application_train_lite.csv", application_train)
+variable = pd.read_csv("application_train_lite.csv", sep=",")
 
 # This is the main test table, without TARGET
 upload_file(application_test_lite.csv, application_test)
