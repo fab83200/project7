@@ -127,34 +127,36 @@ with form:
 	payment_rate = amt_annuity / amt_credit
 
 	submit_button = st.form_submit_button(label="Submit")
-
 	
-# standardizes and normalizes the x data
-std_scale = StandardScaler().fit(x_train)                       	              
-x_train = std_scale.transform(x_train)
-x_valid = std_scale.transform(x_valid)
-x_test = std_scale.transform(x_test)
-random_element = std_scale.transform(np.array(random_element).reshape(1, -1))
-
-# Perform a Logistic Regression
-lr = LogisticRegression(max_iter=3000)
-lr.fit(x_train, y_train)                                                        # (215257, 120)   # (215257,)
-y_pred_lr = lr.predict(x_valid)                                                 # (92254,)        # (92254, 120)
-y_pred_lr_idx  = lr.predict(random_element)[0]
-probability  = lr.predict_proba(random_element)[0, 1]
-    
-# Lime Instanciation
-explainer = lime_tabular.LimeTabularExplainer(np.array(x_train), mode="classification",
-                                              class_names=np.array(['normal', 'default']),
-                                              feature_names=np.array(feature_names))
-explanation = explainer.explain_instance(x_valid[idx], lr.predict_proba, num_features=10)
 
 if submit_button:
 	with st.spinner('Calculating, be patient...'):
-		st.write(f"The chosen parameters give the following results:")
+		# standardizes and normalizes the x data
+		std_scale = StandardScaler().fit(x_train)                       	              
+		x_train = std_scale.transform(x_train)
+		x_valid = std_scale.transform(x_valid)
+		x_test = std_scale.transform(x_test)
+		random_element = std_scale.transform(np.array(random_element).reshape(1, -1))
+
+		# Perform a Logistic Regression
+		lr = LogisticRegression(max_iter=3000)
+		lr.fit(x_train, y_train)                                                        # (215257, 120)   # (215257,)
+		y_pred_lr = lr.predict(x_valid)                                                 # (92254,)        # (92254, 120)
+		y_pred_lr_idx  = lr.predict(random_element)[0]
+		probability  = lr.predict_proba(random_element)[0, 1]
+
+		# Lime Instanciation
+		explainer = lime_tabular.LimeTabularExplainer(np.array(x_train), mode="classification",
+													  class_names=np.array(['normal', 'default']),
+													  feature_names=np.array(feature_names))
+		explanation = explainer.explain_instance(x_valid[idx], lr.predict_proba, num_features=10)
+		
+		st.markdown("### The chosen parameters give the following results")
 		st.write("Prediction : ", y_pred_lr_idx)
 		st.write(f'Probablility of being a Defaulter: {probability:.2%}')
+		st.markdown("")
 		# Display explainer HTML object
+		st.markdown("### Explanation with Lime")
 		components.html(explanation.as_html(), height=800)
 
 #if st.button("Explain Results"):
