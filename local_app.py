@@ -137,8 +137,7 @@ with form:
 						   help=f"Choose a number between {x['AMT_CREDIT'].min():,} and {x['AMT_CREDIT'].max():,}", 
 						   on_change=None)                                      		# Name of the function to use `on_change`
 	
-	birthday = cols[1].date_input("What is your birthday?",								# Name of the number_input
-							datetime.date(1984, 6, 3))									# Sets the default value
+	birthday = cols[1].date_input("What is your birthday?")								# Sets the default value
 	
 	cols[0].markdown("Fill up either yearly repayment or credit length:")
 	cols[1].markdown("")
