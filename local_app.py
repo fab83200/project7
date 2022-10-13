@@ -57,47 +57,6 @@ def upload_file(file, variable):
         variable[ci]=variable[ci].fillna((variable[ci].median()))
     return variable
 
-
-def annuity_to_repayment_rate():
-	"""When a user expresses a loan amount and a yearly repayment,
-it divides the amount of the loan by the yearly repayment
-and supply the loan length expressed in years as a result.
-
-Parameters
-----------
-None.
-
-Returns
--------
-A repayment rate expressed in years.
-
-Example
--------
->>> annuity_to_repayment_rate
-"""
-	st.session_state.payment_rate_widget = st.session_state.amt_credit_widget / st.session_state.amt_annuity_widget
-
-def repayment_rate_to_annuity():
-	"""When a user expresses a loan amount and a loan length,
-it divides the amount of the loan by the loan length
-and supply the yearly repayment expressed in USD as a result.
-
-Parameters
-----------
-None.
-
-Returns
--------
-An annuity repayment expressed in USD.
-
-Example
--------
->>> repayment_rate_to_annuity
-"""
-	st.session_state.amt_annuity_widget = st.session_state.amt_credit_widget / st.session_state.payment_rate_widget
-
-
-
 # This is the main train table, with TARGET
 app_train = upload_file("application_train_lite.csv", "application_train")
 
@@ -133,6 +92,44 @@ st.markdown("### Select your desired loan parameters")
 form = st.form(key="my_form")
 
 with form:
+	def annuity_to_repayment_rate():
+		"""When a user expresses a loan amount and a yearly repayment,
+		it divides the amount of the loan by the yearly repayment
+		and supply the loan length expressed in years as a result.
+
+		Parameters
+		----------
+		None.
+
+		Returns
+		-------
+		A repayment rate expressed in years.
+
+		Example
+		-------
+		>>> annuity_to_repayment_rate
+		"""
+		st.session_state.payment_rate_widget = st.session_state.amt_credit_widget / st.session_state.amt_annuity_widget
+
+	def repayment_rate_to_annuity():
+		"""When a user expresses a loan amount and a loan length,
+		it divides the amount of the loan by the loan length
+		and supply the yearly repayment expressed in USD as a result.
+
+		Parameters
+		----------
+		None.
+
+		Returns
+		-------
+		An annuity repayment expressed in USD.
+
+		Example
+		-------
+		>>> repayment_rate_to_annuity
+		"""
+		st.session_state.amt_annuity_widget = st.session_state.amt_credit_widget / st.session_state.payment_rate_widget
+	
 	amt_credit = st.number_input("What is the desired loan amount:",       		# Name of the number_input
 						   key='amt_credit_widget',                                		# Name of the variable for the data
 						   value=float(x_valid.loc[idx]['AMT_CREDIT']),					# Sets the default value
@@ -147,7 +144,7 @@ with form:
 	amt_annuity = st.number_input("What is the desired yearly repayment?", 	    # Name of the number_input
 						   key='amt_annuity_widget',                            		# Name of the variable for the data
 						   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
-						   on_change=annuity_to_repayment_rate)                     	# Name of the function to use `on_change`
+						   on_change=None)                     	# Name of the function to use `on_change`	annuity_to_repayment_rate
 	ext_source_1 = st.number_input("What is the ext_source_1",              		# Name of the number_input
 							key='ext_source_1_widget',                                  # Name of the variable for the data
 							value=float(x_valid.loc[idx]['EXT_SOURCE_1']),       		# Sets the default value
