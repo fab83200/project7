@@ -60,40 +60,40 @@ def upload_file(file, variable):
 
 def annuity_to_repayment_rate():
 	"""When a user expresses a loan amount and a yearly repayment,
-	it divides the amount of the loan by the yearly repayment
-	and supply the loan length expressed in years as a result.
+it divides the amount of the loan by the yearly repayment
+and supply the loan length expressed in years as a result.
 
-	Parameters
-	----------
-	None.
+Parameters
+----------
+None.
 
-	Returns
-	-------
-	A repayment rate expressed in years.
+Returns
+-------
+A repayment rate expressed in years.
 
-	Example
-	-------
-	>>> annuity_to_repayment_rate
-	"""
+Example
+-------
+>>> annuity_to_repayment_rate
+"""
 	st.session_state.payment_rate_widget = st.session_state.amt_credit_widget / st.session_state.amt_annuity_widget
 
 def repayment_rate_to_annuity():
 	"""When a user expresses a loan amount and a loan length,
-	it divides the amount of the loan by the loan length
-	and supply the yearly repayment expressed in USD as a result.
+it divides the amount of the loan by the loan length
+and supply the yearly repayment expressed in USD as a result.
 
-	Parameters
-	----------
-	None.
+Parameters
+----------
+None.
 
-	Returns
-	-------
-	An annuity repayment expressed in USD.
+Returns
+-------
+An annuity repayment expressed in USD.
 
-	Example
-	-------
-	>>> repayment_rate_to_annuity
-	"""
+Example
+-------
+>>> repayment_rate_to_annuity
+"""
 	st.session_state.amt_annuity_widget = st.session_state.amt_credit_widget / st.session_state.payment_rate_widget
 
 
