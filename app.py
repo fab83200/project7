@@ -147,17 +147,18 @@ probability  = lr.predict_proba(random_element)[0, 1]
 explainer = lime_tabular.LimeTabularExplainer(np.array(x_train), mode="classification",
                                               class_names=np.array(['normal', 'default']),
                                               feature_names=np.array(feature_names))
+explanation = explainer.explain_instance(x_valid[idx], lr.predict_proba, num_features=10)
 
 if submit_button:
 	st.write(f"The chosen parameters give the following results:")
 	st.write("Prediction : ", y_pred_lr_idx)
 	st.write(f'Probablility of being a Defaulter: {probability:.2%}')
-
-
-if st.button("Explain Results"):
-    with st.spinner('Calculating...'):
-        explanation = explainer.explain_instance(x_valid[idx], lr.predict_proba, num_features=10)
         # Display explainer HTML object
         components.html(explanation.as_html(), height=800)
+
+#if st.button("Explain Results"):
+#    with st.spinner('Calculating...'):
+        
+
 
        
