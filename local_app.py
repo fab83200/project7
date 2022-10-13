@@ -133,16 +133,16 @@ st.markdown("### Select your desired loan parameters")
 form = st.form(key="my_form")
 
 with form:
-	cols = st.columns((1, 1))
+	cols = st.columns(2)
 	amt_credit = cols[0].number_input("What is the desired loan amount:",       		# Name of the number_input
 						   key='amt_credit_widget',                                		# Name of the variable for the data
 						   value=float(x_valid.loc[idx]['AMT_CREDIT']),					# Sets the default value
 						   help=f"Choose a number between {x['AMT_CREDIT'].min():,} and {x['AMT_CREDIT'].max():,}", 
 						   on_change=None)                                      		# Name of the function to use `on_change`
-	
+
 	birthday = cols[1].date_input("What is your birthday?",                       		# Name for the birthday variable
 						   key='birthday_widget')                                      	# Name of the variable for the data
-	
+
 	payment_rate = cols[0].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
 						   key='payment_rate_widget',                            		# Name of the variable for the data
 						   value=float(x_valid.loc[idx]['AMT_CREDIT'] / x_valid.loc[idx]['AMT_ANNUITY']),        		# Sets the default value
