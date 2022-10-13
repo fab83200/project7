@@ -82,19 +82,19 @@ def repayment_rate_to_annuity():
 	it divides the amount of the loan by the loan length
 	and supply the yearly repayment expressed in USD as a result.
 
-    Parameters
-    ----------
-    None.
-    
-    Returns
-    -------
-    An annuity repayment expressed in USD.
-    
-    Example
-    -------
-    >>> repayment_rate_to_annuity
-    """
-  	st.session_state.amt_annuity_widget = st.session_state.amt_credit_widget / st.session_state.payment_rate_widget
+	Parameters
+	----------
+	None.
+
+	Returns
+	-------
+	An annuity repayment expressed in USD.
+
+	Example
+	-------
+	>>> repayment_rate_to_annuity
+	"""
+	st.session_state.amt_annuity_widget = st.session_state.amt_credit_widget / st.session_state.payment_rate_widget
 
 
 
