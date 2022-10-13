@@ -142,7 +142,7 @@ with form:
 	
 	birthday = cols[1].date_input("What is your birthday?",                       		# Name for the birthday variable
 						   key='birthday_widget')                                      	# Name of the variable for the data
-	'''
+	
 	cols = st.columns(2)
 	payment_rate = cols[0].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
 						   key='payment_rate_widget',                            		# Name of the variable for the data
@@ -151,33 +151,33 @@ with form:
 						   on_change=repayment_rate_to_annuity)                         # Name of the function to use `on_change`,
 	
 	amt_annuity = cols[1].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
-						   key='amt_annuity_widget',                            		# Name of the variable for the data
-						   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
-						   on_change=annuity_to_repayment_rate)                         # Name of the function to use `on_change`,
-	
-	cols = st.columns(2)
-	ext_source_1 = cols[0].number_input("What is the ext_source_1",              		# Name of the number_input
-						   key='ext_source_1_widget',                                  	# Name of the variable for the data
-						   value=float(x_valid.loc[idx]['EXT_SOURCE_1']),       		# Sets the default value
-						   help=f"Choose a number between {x['EXT_SOURCE_1'].min():,} and {x['EXT_SOURCE_1'].max():,}", 
-						   on_change=None)                                      		# Name of the function to use `on_change`,
-	
-	ext_source_3 = cols[1].number_input("What is the ext_source_3",             		# Name of the number_input
-						   	key='ext_source_3_widget',                                  # Name of the variable for the data
-						   	value=float(x_valid.loc[idx]['EXT_SOURCE_3']),       		# Sets the default value
-						   	help=f"Choose a number between {x['EXT_SOURCE_3'].min():,} and {x['EXT_SOURCE_3'].max():,}", 
-							on_change=None)                                      		# Name of the function to use `on_change`,
-	
-	random_element[6] = amt_credit
-	random_element[7] = amt_annuity
-	random_element[39] = ext_source_1
-	random_element[41] = ext_source_3
-	'''
-	days = birthday - today
-	random_element[15] = days.days	
-	#st.write(f"The number of days is {days.days}")
-	
-	submit_button = st.form_submit_button(label="Submit")
+							   key='amt_annuity_widget',                            		# Name of the variable for the data
+							   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
+							   on_change=annuity_to_repayment_rate)                         # Name of the function to use `on_change`,
+
+		cols = st.columns(2)
+		ext_source_1 = cols[0].number_input("What is the ext_source_1",              		# Name of the number_input
+								key='ext_source_1_widget',                                  	# Name of the variable for the data
+								value=float(x_valid.loc[idx]['EXT_SOURCE_1']),       		# Sets the default value
+								help=f"Choose a number between {x['EXT_SOURCE_1'].min():,} and {x['EXT_SOURCE_1'].max():,}", 
+								on_change=None)                                      		# Name of the function to use `on_change`,
+
+		ext_source_3 = cols[1].number_input("What is the ext_source_3",             		# Name of the number_input
+								key='ext_source_3_widget',                                  # Name of the variable for the data
+								value=float(x_valid.loc[idx]['EXT_SOURCE_3']),       		# Sets the default value
+								help=f"Choose a number between {x['EXT_SOURCE_3'].min():,} and {x['EXT_SOURCE_3'].max():,}", 
+								on_change=None)                                      		# Name of the function to use `on_change`,
+
+		random_element[6] = amt_credit
+		random_element[7] = amt_annuity
+		random_element[39] = ext_source_1
+		random_element[41] = ext_source_3
+
+		days = birthday - today
+		random_element[15] = days.days	
+		#st.write(f"The number of days is {days.days}")
+
+		submit_button = st.form_submit_button(label="Submit")
 	
 
 if submit_button:
