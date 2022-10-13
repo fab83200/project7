@@ -144,14 +144,14 @@ with form:
 	
 	payment_rate = cols[0].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
 						   key='payment_rate_widget',                            		# Name of the variable for the data
-						   value=float(x_valid.loc[idx]['AMT_CREDIT'] / x_valid.loc[idx]['AMT_ANNUITY']),        		# Sets the default value
+						   value=floatfloat(x_valid.loc[idx]['AMT_ANNUITY']),        	# Sets the default value
 						   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
 						   on_change=None)                         						# Name of the function to use `on_change` repayment_rate_to_annuity
 	
 	amt_annuity = cols[1].number_input("What is the desired credit length?", 	    	# Name of the number_input
 						   key='amt_annuity_widget',                            		# Name of the variable for the data
-						   value=float(x_valid.loc[idx]['AMT_ANNUITY']),        		# Sets the default value
-						   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
+						   value=(x_valid.loc[idx]['AMT_CREDIT'] / x_valid.loc[idx]['AMT_ANNUITY']),        		# Sets the default value
+						   help="Choose a number between 1 and 30 years", 
 						   on_change=None)                     							# Name of the function to use `on_change`	annuity_to_repayment_rate
 	
 	ext_source_1 = cols[0].number_input("What is the ext_source_1",              		# Name of the number_input
