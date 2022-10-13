@@ -102,6 +102,13 @@ app_train = upload_file("application_train_lite.csv", "application_train")
 # This is the main test table, without TARGET
 app_test = upload_file("application_test_lite.csv", "application_test")
 
+last_index = app_train.shape[0]
+app_train.loc[last_index] = ["None"] * 120
+for tr in app_train.describe(include='object').columns:
+  app_train.loc[last_index][tr] = app_train[tr].mode()[0]
+
+last_element = x_valid.loc[last_index]
+
 # This cell is used to label encode all non numerical features for the `app_train` and `app_test` datasets
 l = LabelEncoder()
 for p in app_train.describe(include='object').columns:
@@ -109,7 +116,6 @@ for p in app_train.describe(include='object').columns:
 # l = LabelEncoder()
 for q in app_test.describe(include='object').columns:
   app_test[q]=l.fit_transform(app_test[q])
-
 
 # Prepare the Datasets
 x = app_train.drop(['TARGET', 'SK_ID_CURR'],axis=1)
@@ -120,16 +126,7 @@ x_valid = x_valid.reset_index()
 del x_valid['index']
 feature_names = x_train.columns
 
-
 last_index = x_valid.shape[0]
-x_valid.loc[last_index] = ["None"] * 120
-for tr in x_valid.describe(include='object').columns:
-  x_valid.loc[last_index][tr] = x_valid[tr].mode()[0]
-
-# Choose a random sample
-#idx = random.randint(1, len(x_valid))
-#idx = 18530
-
 last_element = x_valid.loc[last_index]
 
 st.markdown("### Select your desired loan parameters")
@@ -169,13 +166,6 @@ with form:
 	x_valid.loc[last_index]['AMT_CREDIT'] = amt_goods_price - down_payment
 	x_valid.loc[last_index]['AMT_ANNUITY'] = amt_annuity
 	x_valid.loc[last_index]['AMT_GOODS_PRICE'] = amt_goods_price
-	
-	#random_element[1] = code_gender
-	#random_element[2] = flag_own_car
-	#random_element[5] = amt_income_total
-	#random_element[6] = amt_goods_price - down_payment
-	#random_element[7] = amt_annuity
-	#random_element[8] = amt_goods_price
 
 	submit_button = st.form_submit_button(label="Submit")
 	
