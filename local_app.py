@@ -143,7 +143,7 @@ with form:
 	birthday = cols[1].date_input("What is your birthday?",                       		# Name for the birthday variable
 						   key='birthday_widget')                                      	# Name of the variable for the data
 	
-	cols = st.columns(2)
+	cols = st.columns((1, 1))
 	payment_rate = cols[0].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
 						   key='payment_rate_widget',                            		# Name of the variable for the data
 						   value=float(x_valid.loc[idx]['AMT_CREDIT'] / x_valid.loc[idx]['AMT_ANNUITY']),        		# Sets the default value
@@ -154,7 +154,7 @@ with form:
 						   key='amt_annuity_widget',                            		# Name of the variable for the data
 						   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
 						   on_change=annuity_to_repayment_rate)                     	# Name of the function to use `on_change`,
-	
+	'''
 	cols = st.columns(2)
 	ext_source_1 = cols[0].number_input("What is the ext_source_1",              		# Name of the number_input
 							key='ext_source_1_widget',                                  # Name of the variable for the data
@@ -176,7 +176,7 @@ with form:
 	days = birthday - today
 	random_element[15] = days.days	
 	st.write(f"The number of days is {days.days}")
-	
+	'''
 	submit_button = st.form_submit_button(label="Submit")
 	
 
