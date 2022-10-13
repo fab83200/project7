@@ -154,7 +154,7 @@ with form:
 						   key='amt_annuity_widget',                            		# Name of the variable for the data
 						   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
 						   on_change=annuity_to_repayment_rate)                         # Name of the function to use `on_change`,
-	'''
+	
 	cols = st.columns(2)
 	ext_source_1 = cols[0].number_input("What is the ext_source_1",              		# Name of the number_input
 						   key='ext_source_1_widget',                                  	# Name of the variable for the data
@@ -167,7 +167,7 @@ with form:
 						   	value=float(x_valid.loc[idx]['EXT_SOURCE_3']),       		# Sets the default value
 						   	help=f"Choose a number between {x['EXT_SOURCE_3'].min():,} and {x['EXT_SOURCE_3'].max():,}", 
 							on_change=None)                                      		# Name of the function to use `on_change`,
-	
+	'''
 	random_element[6] = amt_credit
 	random_element[7] = amt_annuity
 	random_element[39] = ext_source_1
