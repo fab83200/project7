@@ -141,6 +141,8 @@ with form:
 							value=datetime.date(1984, 6, 3))							# Sets the default value
 	
 	cols[0].markdown("Fill up either yearly repayment or credit length:")
+	cols[1].markdown("")
+	
 	payment_rate = cols[0].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
 						   key='payment_rate_widget',                            		# Name of the variable for the data
 						   value=float(x_valid.loc[idx]['AMT_CREDIT'] / x_valid.loc[idx]['AMT_ANNUITY']),        		# Sets the default value
