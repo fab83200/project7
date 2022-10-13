@@ -167,12 +167,12 @@ with form:
 						   	value=float(x_valid.loc[idx]['EXT_SOURCE_3']),       		# Sets the default value
 						   	help=f"Choose a number between {x['EXT_SOURCE_3'].min():,} and {x['EXT_SOURCE_3'].max():,}", 
 							on_change=None)                                      		# Name of the function to use `on_change`,
-	'''
+	
 	random_element[6] = amt_credit
 	random_element[7] = amt_annuity
 	random_element[39] = ext_source_1
 	random_element[41] = ext_source_3
-	
+	'''
 	days = birthday - today
 	random_element[15] = days.days	
 	#st.write(f"The number of days is {days.days}")
