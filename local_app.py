@@ -137,15 +137,17 @@ with form:
 						   help=f"Choose a number between {x['AMT_CREDIT'].min():,} and {x['AMT_CREDIT'].max():,}", 
 						   on_change=None)                                      		# Name of the function to use `on_change`
 	birthday = cols[1].date_input("What is your birthday?")
+	st.markdown("Fill up either yearly repayment or credit length")
 	payment_rate = cols[0].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
 						   key='payment_rate_widget',                            		# Name of the variable for the data
 						   value=float(x_valid.loc[idx]['AMT_CREDIT'] / x_valid.loc[idx]['AMT_ANNUITY']),        		# Sets the default value
 						   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
-						   on_change=repayment_rate_to_annuity)                         # Name of the function to use `on_change` repayment_rate_to_annuity
-	amt_annuity = cols[1].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
+						   on_change=None)                         						# Name of the function to use `on_change` repayment_rate_to_annuity
+	amt_annuity = cols[1].number_input("What is the desired credit length?", 	    	# Name of the number_input
 						   key='amt_annuity_widget',                            		# Name of the variable for the data
+						   value=20.0,        											# Sets the default value
 						   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
-						   on_change=annuity_to_repayment_rate)                     	# Name of the function to use `on_change`	annuity_to_repayment_rate
+						   on_change=None)                     							# Name of the function to use `on_change`	annuity_to_repayment_rate
 	ext_source_1 = cols[0].number_input("What is the ext_source_1",              		# Name of the number_input
 							key='ext_source_1_widget',                                  # Name of the variable for the data
 							value=float(x_valid.loc[idx]['EXT_SOURCE_1']),       		# Sets the default value
