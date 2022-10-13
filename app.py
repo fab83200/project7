@@ -105,6 +105,7 @@ with form:
                                help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
                                on_change=None)                                      # Name of the function to use `on_change`,
                                                                                     # it would be `on_click` for one-off widgets
+    cols = st.columns((1, 1))
     with cols[0]:
 	birthday = st.date_input("What is your birthday?",                       # Name for the birthday variable
                                key='birthday_widget',                                      # Name of the variable for the data
@@ -112,6 +113,7 @@ with form:
                                help=f"Choose a number between {x['DAYS_BIRTH'].min()} and {x['DAYS_BIRTH'].max()}", 
                                on_change=None)                                      # Name of the function to use `on_change`,
                                                                                     # it would be `on_click` for one-off widgets
+    cols = st.columns((1, 1))
     with cols[0]:
      	ext_source_1 = st.number_input("What is the ext_source_1",              # Name of the number_input
                                key='ext_source_1_widget',                                  # Name of the variable for the data
