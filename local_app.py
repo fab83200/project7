@@ -57,6 +57,45 @@ def upload_file(file, variable):
         variable[ci]=variable[ci].fillna((variable[ci].median()))
     return variable
 
+def annuity_to_repayment_rate():
+	"""When a user expresses a loan amount and a yearly repayment,
+	it divides the amount of the loan by the yearly repayment
+	and supply the loan length expressed in years as a result.
+
+	Parameters
+	----------
+	None.
+
+	Returns
+	-------
+	A repayment rate expressed in years.
+
+	Example
+	-------
+	>>> annuity_to_repayment_rate
+	"""
+	st.session_state.payment_rate_widget = st.session_state.amt_credit_widget / st.session_state.amt_annuity_widget
+
+def repayment_rate_to_annuity():
+	"""When a user expresses a loan amount and a loan length,
+	it divides the amount of the loan by the loan length
+	and supply the yearly repayment expressed in USD as a result.
+
+	Parameters
+	----------
+	None.
+
+	Returns
+	-------
+	An annuity repayment expressed in USD.
+
+	Example
+	-------
+	>>> repayment_rate_to_annuity
+	"""
+	st.session_state.amt_annuity_widget = st.session_state.amt_credit_widget / st.session_state.payment_rate_widget
+
+
 # This is the main train table, with TARGET
 app_train = upload_file("application_train_lite.csv", "application_train")
 
@@ -81,100 +120,62 @@ x_valid = x_valid.reset_index()
 del x_valid['index']
 feature_names = x_train.columns
 
+
+last_index = x_valid.shape[0]
+x_valid.loc[last_index] = ["None"] * 120
+for tr in x_valid.describe(include='object').columns:
+  x_valid.loc[last_index][tr] = x_valid[tr].mode()[0]
+
 # Choose a random sample
-idx = random.randint(1, len(x_valid))
+#idx = random.randint(1, len(x_valid))
 #idx = 18530
 
-random_element = x_valid.loc[idx]
+last_element = x_valid.loc[last_index]
 
 st.markdown("### Select your desired loan parameters")
 
 form = st.form(key="my_form")
 
 with form:
-	def annuity_to_repayment_rate():
-		"""When a user expresses a loan amount and a yearly repayment,
-		it divides the amount of the loan by the yearly repayment
-		and supply the loan length expressed in years as a result.
-
-		Parameters
-		----------
-		None.
-
-		Returns
-		-------
-		A repayment rate expressed in years.
-
-		Example
-		-------
-		>>> annuity_to_repayment_rate
-		"""
-		st.session_state.payment_rate_widget = st.session_state.amt_credit_widget / st.session_state.amt_annuity_widget
-
-	def repayment_rate_to_annuity():
-		"""When a user expresses a loan amount and a loan length,
-		it divides the amount of the loan by the loan length
-		and supply the yearly repayment expressed in USD as a result.
-
-		Parameters
-		----------
-		None.
-
-		Returns
-		-------
-		An annuity repayment expressed in USD.
-
-		Example
-		-------
-		>>> repayment_rate_to_annuity
-		"""
-		st.session_state.amt_annuity_widget = st.session_state.amt_credit_widget / st.session_state.payment_rate_widget
-	
 	cols=st.columns(2)
-	amt_credit = cols[0].number_input("What is the desired loan amount:",       		# Name of the number_input
-						   key='amt_credit_widget',                                		# Name of the variable for the data
-						   value=float(x_valid.loc[idx]['AMT_CREDIT']),					# Sets the default value
-						   help=f"Choose a number between {x['AMT_CREDIT'].min():,} and {x['AMT_CREDIT'].max():,}", 
-						   on_change=None)                                      		# Name of the function to use `on_change`
+	amt_goods_price = cols[0].number_input("What is the value of the property (USD):",  	# Name of the number_input
+						   key='amt_goods_price_widget')
 	
-	birthday = cols[1].date_input("What is your birthday?")								# Sets the default value
+	down_payment = cols[1].number_input("What is amount of down payment (USD):",  			# Name of the number_input
+						   key='down_payment_widget') 
 	
-	cols[0].markdown("**Fill up either the yearly repayment...**")
-	cols[1].markdown("**... or the credit length:**")
+	amt_annuity = cols[0].number_input("What is the desired credit length?", 	    		# Name of the number_input
+						   key='amt_annuity_widget',                            			# Name of the variable for the data
+						   value=20.0, 														# Sets the default value
+						   help="Choose a number between 1 and 30 years")
 	
-	payment_rate = cols[0].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
-						   key='payment_rate_widget',                            		# Name of the variable for the data
-						   value=float(x_valid.loc[idx]['AMT_ANNUITY']),        		# Sets the default value
-						   help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
-						   on_change=None)                         						# Name of the function to use `on_change` repayment_rate_to_annuity
+	amt_income_total = cols[1].number_input("What is Your total income (USD)?", 			# Name of the number_input
+						   key='amt_income_total')
 	
-	amt_annuity = cols[1].number_input("What is the desired credit length?", 	    	# Name of the number_input
-						   key='amt_annuity_widget',                            		# Name of the variable for the data
-						   value=float(x_valid.loc[idx]['AMT_CREDIT'] / x_valid.loc[idx]['AMT_ANNUITY']), 	# Sets the default value
-						   help="Choose a number between 1 and 30 years",				# displays some help
-						   on_change=None)                     							# Name of the function to use `on_change`	annuity_to_repayment_rate
+	genders_available = ['MALE', 'FEMALE']
+	features_available = ['YES', 'NO']
 	
-	ext_source_1 = cols[0].number_input("What is the ext_source_1",              		# Name of the number_input
-							key='ext_source_1_widget',                                  # Name of the variable for the data
-							value=float(x_valid.loc[idx]['EXT_SOURCE_1']),       		# Sets the default value
-							help=f"Choose a number between {x['EXT_SOURCE_1'].min():,} and {x['EXT_SOURCE_1'].max():,}", 
-							on_change=None)                                      		# Name of the function to use `on_change`
-	
-	ext_source_3 = cols[1].number_input("What is the ext_source_3",             		# Name of the number_input
-							key='ext_source_3_widget',                                  # Name of the variable for the data
-							value=float(x_valid.loc[idx]['EXT_SOURCE_3']),       		# Sets the default value
-							help=f"Choose a number between {x['EXT_SOURCE_3'].min():,} and {x['EXT_SOURCE_3'].max():,}", 
-							on_change=None)                                      		# Name of the function to use `on_change`
-	
+	code_gender = cols[0].radio("What is your gender?",                          			# creates a Radio_Buttons widget
+							genders_available,                               		  		# set the available options
+							key="flag_own_car_button")                         				# names the radio button
 
-	random_element[6] = amt_credit
-	random_element[7] = amt_annuity
-	random_element[39] = ext_source_1
-	random_element[41] = ext_source_3
+	flag_own_car = cols[1].radio("Do you own a car?",                          				# creates a Radio_Buttons widget
+							features_available,                               		  		# set the available options
+							key="flag_own_car_button")                         				# names the radio button
 
-	days = birthday - today
-	random_element[15] = days.days
-	st.write(f"The number of days is {days.days}")
+	x_valid.loc[last_index]['CODE_GENDER'] = code_gender
+	x_valid.loc[last_index]['FLAG_OWN_CAR'] = flag_own_car
+	x_valid.loc[last_index]['AMT_INCOME_TOTAL'] = amt_income_total
+	x_valid.loc[last_index]['AMT_CREDIT'] = amt_goods_price - down_payment
+	x_valid.loc[last_index]['AMT_ANNUITY'] = amt_annuity
+	x_valid.loc[last_index]['AMT_GOODS_PRICE'] = amt_goods_price
+	
+	#random_element[1] = code_gender
+	#random_element[2] = flag_own_car
+	#random_element[5] = amt_income_total
+	#random_element[6] = amt_goods_price - down_payment
+	#random_element[7] = amt_annuity
+	#random_element[8] = amt_goods_price
 
 	submit_button = st.form_submit_button(label="Submit")
 	
@@ -192,14 +193,14 @@ if submit_button:
 		lr = LogisticRegression(max_iter=3000)
 		lr.fit(x_train, y_train)                                                        # (215257, 120)   # (215257,)
 		y_pred_lr = lr.predict(x_valid)                                                 # (92254,)        # (92254, 120)
-		y_pred_lr_idx  = lr.predict(random_element)[0]
-		probability  = lr.predict_proba(random_element)[0, 1]
+		y_pred_lr_idx  = lr.predict(last_element)[0]
+		probability  = lr.predict_proba(last_element)[0, 1]
 
 		# Lime Instanciation
 		explainer = lime_tabular.LimeTabularExplainer(np.array(x_train), mode="classification",
 													  class_names=np.array(['normal', 'default']),
 													  feature_names=np.array(feature_names))
-		explanation = explainer.explain_instance(x_valid[idx], lr.predict_proba, num_features=10)
+		explanation = explainer.explain_instance(x_valid[last_index], lr.predict_proba, num_features=10)
 		
 		st.markdown("### The chosen parameters give the following results")
 		st.write("Prediction : ", y_pred_lr_idx)
