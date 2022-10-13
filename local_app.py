@@ -139,8 +139,8 @@ with form:
 	
 	birthday = cols[1].date_input("What is your birthday?")								# Sets the default value
 	
-	cols[0].markdown("Fill up either yearly repayment or credit length:")
-	cols[1].markdown("")
+	cols[0].markdown("**Fill up either the yearly repayment...**")
+	cols[1].markdown("**... or the credit length:**")
 	
 	payment_rate = cols[0].number_input("What is the desired yearly repayment?", 	    # Name of the number_input
 						   key='payment_rate_widget',                            		# Name of the variable for the data
