@@ -13,10 +13,9 @@ from lime import lime_tabular
 import streamlit.components.v1 as components
 
 st.set_page_config(                                                             # sets a title for the browser tab
-    page_title="💰Credit Score API",
-    page_icon="💰💵🪙💸💲",)
+    page_title="💰Credit Score API")
 
-st.title("💲Project 7💲")
+st.title("💲Project 7: Local Analysis💲")
 st.header("")
 
 with st.expander("ℹ️ - About this app", expanded=True):
@@ -130,7 +129,7 @@ with form:
 	
 
 if submit_button:
-	with st.spinner('Calculating, be patient...'):
+	with st.spinner('Calculating, it takes about 1 minute...'):
 		# standardizes and normalizes the x data
 		std_scale = StandardScaler().fit(x_train)                       	              
 		x_train = std_scale.transform(x_train)
@@ -158,9 +157,6 @@ if submit_button:
 		# Display explainer HTML object
 		st.markdown("### Explanation with Lime")
 		components.html(explanation.as_html(), height=800)
-
-#if st.button("Explain Results"):
-#    with st.spinner('Calculating...'):
         
 
 
