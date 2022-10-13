@@ -159,7 +159,7 @@ explainer = lime_tabular.LimeTabularExplainer(np.array(x_train), mode="classific
                                               class_names=np.array(['normal', 'default']),
                                               feature_names=np.array(feature_names))
 
-if submit button:
+if submit_button:
 	st.write(f"The chosen parameters give the following results:")
 	st.write("Prediction : ", y_pred_lr_idx)
 	st.write(f'Probablility of being a Defaulter: {probability:.2%}')
