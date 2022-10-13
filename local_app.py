@@ -2,8 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import random
-import time
-today = time.time()
+
+from datetime import date
+today = date.today()
 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
