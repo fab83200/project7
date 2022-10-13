@@ -13,15 +13,11 @@ from lime import lime_tabular
 import streamlit.components.v1 as components
 
 st.set_page_config(                                                             # sets a title for the browser tab
-    page_title="Credit Score API",
+    page_title="💰Credit Score API",
     page_icon="💰💵🪙💸💲",)
 
-c30, c31, c32 = st.columns([3, 1, 3])
-
-with c30:
-    # st.image("logo.png", width=400)
-    st.title("💲Project 7💲")
-    st.header("")
+st.title("💲Project 7💲")
+st.header("")
 
 with st.expander("ℹ️ - About this app", expanded=True):
     st.write("""Write the details here:     
@@ -103,27 +99,28 @@ with form:
                                on_change=None)                                      # Name of the function to use `on_change`,
                                                                                     # it would be `on_click` for one-off widgets
     with cols[1]:
-      amt_annuity = st.number_input("What is the desired yearly repayment:", # Name of the number_input
+      	amt_annuity = st.number_input("What is the desired yearly repayment:", # Name of the number_input
                                key='amt_annuity_widget',                                   # Name of the variable for the data
                                value=float(x_valid.loc[idx]['AMT_ANNUITY']),        # Sets the default value
                                help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
                                on_change=None)                                      # Name of the function to use `on_change`,
                                                                                     # it would be `on_click` for one-off widgets
-    birthday = st.date_input("What is your birthday?",                       # Name for the birthday variable
+    with cols[0]:
+	birthday = st.date_input("What is your birthday?",                       # Name for the birthday variable
                                key='birthday_widget',                                      # Name of the variable for the data
                                value=x_valid.loc[idx]['DAYS_BIRTH'],                # Sets the default value
                                help=f"Choose a number between {x['DAYS_BIRTH'].min()} and {x['DAYS_BIRTH'].max()}", 
                                on_change=None)                                      # Name of the function to use `on_change`,
                                                                                     # it would be `on_click` for one-off widgets
     with cols[0]:
-     ext_source_1 = st.number_input("What is the ext_source_1",              # Name of the number_input
+     	ext_source_1 = st.number_input("What is the ext_source_1",              # Name of the number_input
                                key='ext_source_1_widget',                                  # Name of the variable for the data
                                value=float(x_valid.loc[idx]['EXT_SOURCE_1']),       # Sets the default value
                                help=f"Choose a number between {x['EXT_SOURCE_1'].min():,} and {x['EXT_SOURCE_1'].max():,}", 
                                on_change=None)                                      # Name of the function to use `on_change`,
                                                                                     # it would be `on_click` for one-off widgets
     with cols[1]:
-      ext_source_3 = st.number_input("What is the ext_source_3",             # Name of the number_input
+      	ext_source_3 = st.number_input("What is the ext_source_3",             # Name of the number_input
                                key='ext_source_3_widget',                                  # Name of the variable for the data
                                value=float(x_valid.loc[idx]['EXT_SOURCE_3']),       # Sets the default value
                                help=f"Choose a number between {x['EXT_SOURCE_3'].min():,} and {x['EXT_SOURCE_3'].max():,}", 
