@@ -104,10 +104,7 @@ with form:
 						   on_change=None)                                      		# Name of the function to use `on_change`,
 
 	birthday = st.date_input("What is your birthday?",                       			# Name for the birthday variable
-						   key='birthday_widget',                                      	# Name of the variable for the data
-						   value=x_valid.loc[idx]['DAYS_BIRTH'],                		# Sets the default value
-						   help=f"Choose a number between {x['DAYS_BIRTH'].min()} and {x['DAYS_BIRTH'].max()}", 
-						   on_change=None)                                      		# Name of the function to use `on_change`,
+						   key='birthday_widget')                                      	# Name of the variable for the data
 
 	ext_source_1 = cols[0].number_input("What is the ext_source_1",              		# Name of the number_input
 						   key='ext_source_1_widget',                                  	# Name of the variable for the data
@@ -120,7 +117,6 @@ with form:
 						   value=float(x_valid.loc[idx]['EXT_SOURCE_3']),       		# Sets the default value
 						   help=f"Choose a number between {x['EXT_SOURCE_3'].min():,} and {x['EXT_SOURCE_3'].max():,}", 
 						   on_change=None)                                      		# Name of the function to use `on_change`,
-
 
 	random_element[6] = amt_credit
 	random_element[7] = amt_annuity
