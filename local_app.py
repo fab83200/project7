@@ -138,7 +138,7 @@ with form:
 						   on_change=None)                                      		# Name of the function to use `on_change`
 	
 	birthday = cols[1].date_input("What is your birthday?",								# Name of the number_input
-							value=datetime.date(1984, 6, 3))							# Sets the default value
+							datetime.date(1984, 6, 3))									# Sets the default value
 	
 	cols[0].markdown("Fill up either yearly repayment or credit length:")
 	cols[1].markdown("")
