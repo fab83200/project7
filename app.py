@@ -12,10 +12,23 @@ from sklearn.metrics import accuracy_score
 from lime import lime_tabular
 import streamlit.components.v1 as components
 
-title_text = 'Credit Score API'
+st.set_page_config(                                                             # sets a title for the browser tab
+    page_title="Credit Score API",
+    page_icon="💰💵🪙💸💲",)
 
-st.markdown(f"<h2 style='text-align: center;'><b>{title_text}</b></h2>", unsafe_allow_html=True)
-st.text("")
+c30, c31, c32 = st.columns([3, 1, 3])
+
+with c30:
+    # st.image("logo.png", width=400)
+    st.title("💲Project 7💲")
+    st.header("")
+
+with st.expander("ℹ️ - About this app", expanded=True):
+    st.write("""Write the details here:     
+-  Detail1 
+-  Detail2
+	    """)
+    st.markdown("")
 
 def upload_file(file, variable):
     """upload_file function to load a .csv data file into a DataFrame.
@@ -77,44 +90,52 @@ idx = random.randint(1, len(x_valid))
 random_element = x_valid.loc[idx]
 
 st.markdown("### Select your desired loan parameters")
-with st.form(key="my_form"):
-    col1, buffer_column = st.columns([2, .5])
-    with col1:
-      amt_credit_widget = st.number_input("What is the desired loan amount:",       # Name of the number_input
-                               key='amt_credit',                                    # Name of the variable for the data
+
+form = st.form(key="my_form")
+
+with form:
+    cols = st.columns((1, 1))
+    with cols[0]:
+      amt_credit = st.number_input("What is the desired loan amount:",       # Name of the number_input
+                               key='amt_credit_widget',                                    # Name of the variable for the data
                                value=float(x_valid.loc[idx]['AMT_CREDIT']),         # Sets the default value
                                help=f"Choose a number between {x['AMT_CREDIT'].min():,} and {x['AMT_CREDIT'].max():,}", 
-                               on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
-    with col1:
-      amt_annuity_widget = st.number_input("What is the desired yearly repayment:", # Name of the number_input
-                               key='amt_annuity',                                   # Name of the variable for the data
+                               on_change=None)                                      # Name of the function to use `on_change`,
+                                                                                    # it would be `on_click` for one-off widgets
+    with cols[1]:
+      amt_annuity = st.number_input("What is the desired yearly repayment:", # Name of the number_input
+                               key='amt_annuity_widget',                                   # Name of the variable for the data
                                value=float(x_valid.loc[idx]['AMT_ANNUITY']),        # Sets the default value
                                help=f"Choose a number between {x['AMT_ANNUITY'].min():,} and {x['AMT_ANNUITY'].max():,}", 
-                               on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
-    with col1:
-      days_birth_widget = st.number_input("Number of days",                         # Name of the number_input
-                               key='days_birth',                                    # Name of the variable for the data
+                               on_change=None)                                      # Name of the function to use `on_change`,
+                                                                                    # it would be `on_click` for one-off widgets
+    birthday = st.date_input("What is your birthday?",                       # Name for the birthday variable
+                               key='birthday_widget',                                      # Name of the variable for the data
                                value=x_valid.loc[idx]['DAYS_BIRTH'],                # Sets the default value
                                help=f"Choose a number between {x['DAYS_BIRTH'].min()} and {x['DAYS_BIRTH'].max()}", 
-                               on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
-    with col1:
-     ext_source_1_widget = st.number_input("What is the ext_source_1",              # Name of the number_input
-                               key='ext_source_1',                                  # Name of the variable for the data
+                               on_change=None)                                      # Name of the function to use `on_change`,
+                                                                                    # it would be `on_click` for one-off widgets
+    with cols[0]:
+     ext_source_1 = st.number_input("What is the ext_source_1",              # Name of the number_input
+                               key='ext_source_1_widget',                                  # Name of the variable for the data
                                value=float(x_valid.loc[idx]['EXT_SOURCE_1']),       # Sets the default value
                                help=f"Choose a number between {x['EXT_SOURCE_1'].min():,} and {x['EXT_SOURCE_1'].max():,}", 
-                               on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
-    with col1:
-      ext_source_3_widget = st.number_input("What is the ext_source_3",             # Name of the number_input
-                               key='ext_source_3',                                  # Name of the variable for the data
+                               on_change=None)                                      # Name of the function to use `on_change`,
+                                                                                    # it would be `on_click` for one-off widgets
+    with cols[1]:
+      ext_source_3 = st.number_input("What is the ext_source_3",             # Name of the number_input
+                               key='ext_source_3_widget',                                  # Name of the variable for the data
                                value=float(x_valid.loc[idx]['EXT_SOURCE_3']),       # Sets the default value
                                help=f"Choose a number between {x['EXT_SOURCE_3'].min():,} and {x['EXT_SOURCE_3'].max():,}", 
-                               on_change=None)                                      # Name of the function to use `on_change`, it would be `on_click` for one-off widgets
+                               on_change=None)                                      # Name of the function to use `on_change`,
+                                                                                    # it would be `on_click` for one-off widgets
 
-    random_element[6] = amt_credit_widget
-    random_element[7] = st.session_state.amt_annuity
-    random_element[15] = st.session_state.days_birth
-    random_element[39] = st.session_state.ext_source_1
-    random_element[41] = st.session_state.ext_source_3
+    random_element[6] = amt_credit
+    random_element[7] = amt_annuity
+    st.write(f"The birthday is {birthday}")
+    #random_element[15] = birthday
+    random_element[39] = ext_source_1
+    random_element[41] = ext_source_3
     payment_rate = st.session_state.amt_annuity / st.session_state.amt_credit
     
     submit_button = st.form_submit_button(label="Submit")
