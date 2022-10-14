@@ -3,9 +3,6 @@ import pandas as pd
 import numpy as np
 import random
 
-from datetime import date
-today = date.today()
-
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -22,9 +19,20 @@ st.title("💲Project 7: Local Analysis💲")
 st.header("")
 
 with st.expander("ℹ️ - About this app", expanded=True):
-    st.write("""Write the details here:     
--  Detail1 
--  Detail2
+    st.write("""This API will make a prediction on loan default with parameters choosen by the user.    
+For each case, there are too many parameters needed. Therefore, we made specific assumptions and choices:
+-  Most users are only interested in 3 fields (`Value of property`, `downpayment`, `credit length`),
+-  Our Python notebook analyzis showed that the `household incomes` matter,
+-  For the purpose of this OC Project, we decided to add 2 customs radio button for the sake of diversity,
+-  All the other missing variables will be filled up with their dataset medians (only numeric data with LabelEncoder). 
+
+Below, select your desired loan parameters and hit the button `SUBMIT`.
+
+Then 2 types of computations is made:
+-  The first one is a classic Logistic Regression algorithm to determine the probability of the user to be a defaulter,
+-  The second one is performing a feature importance using the LIME library. 
+
+NOTA: _My Github account sets a file size limit at 25 MB, so I'm only using 1/6th of the total dataset._
 """)
     st.markdown("")
 
@@ -57,44 +65,6 @@ def upload_file(file, variable):
 		variable[ci]=variable[ci].fillna((variable[ci].median()))
 	return variable
 
-def annuity_to_repayment_rate():
-	"""When a user expresses a loan amount and a yearly repayment,
-	it divides the amount of the loan by the yearly repayment
-	and supply the loan length expressed in years as a result.
-
-	Parameters
-	----------
-	None.
-
-	Returns
-	-------
-	A repayment rate expressed in years.
-
-	Example
-	-------
-	>>> annuity_to_repayment_rate
-	"""
-	st.session_state.payment_rate_widget = st.session_state.amt_credit_widget / st.session_state.amt_annuity_widget
-
-def repayment_rate_to_annuity():
-	"""When a user expresses a loan amount and a loan length,
-	it divides the amount of the loan by the loan length
-	and supply the yearly repayment expressed in USD as a result.
-
-	Parameters
-	----------
-	None.
-
-	Returns
-	-------
-	An annuity repayment expressed in USD.
-
-	Example
-	-------
-	>>> repayment_rate_to_annuity
-	"""
-	st.session_state.amt_annuity_widget = st.session_state.amt_credit_widget / st.session_state.payment_rate_widget
-
 
 # This is the main train table, with TARGET
 app_train = upload_file("application_train_lite.csv", "application_train")
@@ -106,7 +76,6 @@ app_test = upload_file("application_test_lite.csv", "application_test")
 l = LabelEncoder()
 for p in app_train.describe(include='object').columns:
   app_train[p]=l.fit_transform(app_train[p])
-# l = LabelEncoder()
 for q in app_test.describe(include='object').columns:
   app_test[q]=l.fit_transform(app_test[q])
 
