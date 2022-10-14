@@ -29,7 +29,7 @@ with st.expander("ℹ️ - About this app", expanded=True):
     st.markdown("")
 
 def upload_file(file, variable):
-    """upload_file function to load a .csv data file into a DataFrame.
+	"""upload_file function to load a .csv data file into a DataFrame.
 	If 'object' values for a feature are missing,
 	it is replaced by the mode of that feature (ie. the most common feature).
 	If 'numeric' values for a feature are missing,
@@ -102,13 +102,6 @@ app_train = upload_file("application_train_lite.csv", "application_train")
 # This is the main test table, without TARGET
 app_test = upload_file("application_test_lite.csv", "application_test")
 
-last_index = app_train.shape[0]
-app_train.loc[last_index] = ["None"] * 120
-for tr in app_train.describe(include='object').columns:
-  app_train.loc[last_index][tr] = app_train[tr].mode()[0]
-
-last_element = x_valid.loc[last_index]
-
 # This cell is used to label encode all non numerical features for the `app_train` and `app_test` datasets
 l = LabelEncoder()
 for p in app_train.describe(include='object').columns:
@@ -127,6 +120,9 @@ del x_valid['index']
 feature_names = x_train.columns
 
 last_index = x_valid.shape[0]
+x_valid.loc[last_index] = x_valid.loc[last_index-1]
+for tr in x_valid.describe().columns:
+  x_valid.loc[last_index][tr] = x_valid[tr].median()
 last_element = x_valid.loc[last_index]
 
 st.markdown("### Select your desired loan parameters")
