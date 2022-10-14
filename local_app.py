@@ -21,8 +21,8 @@ st.header("")
 with st.expander("ℹ️ - About this app", expanded=True):
     st.write("""This API will make a prediction on loan default with parameters choosen by the user.    
 For each case, there are too many parameters needed. Therefore, we made specific assumptions and choices:
--  Most users are only interested in 3 fields (`Value of property`, `downpayment`, `credit length`),
--  Our Python notebook analyzis showed that the `household incomes` matter,
+-  Most users are only interested in 3 fields (`property_value`, `downpayment`, `credit_length`),
+-  Our Python notebook analyzis showed that the `household_incomes` matter,
 -  For the purpose of this OC Project, we decided to add 2 customs radio button for the sake of diversity,
 -  All the other missing variables will be filled up with their dataset medians (only numeric data with LabelEncoder). 
 
@@ -136,7 +136,7 @@ with form:
 	
 
 if submit_button:
-	with st.spinner('Calculating, it takes about 1 minute...'):
+	with st.spinner('Calculating, it takes about 1.5 minute...'):
 		# standardizes and normalizes the x data
 		std_scale = StandardScaler().fit(x_train)                       	              
 		x_train = std_scale.transform(x_train)
