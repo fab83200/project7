@@ -123,7 +123,7 @@ last_index = x_valid.shape[0]
 x_valid.loc[last_index] = x_valid.loc[last_index-1]
 for tr in x_valid.describe().columns:
   x_valid.loc[last_index][tr] = x_valid[tr].median()
-last_element = x_valid.loc[last_index]
+#last_element = x_valid.loc[last_index]
 
 st.markdown("### Select your desired loan parameters")
 
@@ -173,7 +173,8 @@ if submit_button:
 		x_train = std_scale.transform(x_train)
 		x_valid = std_scale.transform(x_valid)
 		x_test = std_scale.transform(x_test)
-		random_element = std_scale.transform(np.array(random_element).reshape(1, -1))
+		last_element = x_valid[last_index]
+		#random_element = std_scale.transform(np.array(random_element).reshape(1, -1))
 
 		# Perform a Logistic Regression
 		lr = LogisticRegression(max_iter=3000)
