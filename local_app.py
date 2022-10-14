@@ -173,7 +173,7 @@ if submit_button:
 		x_train = std_scale.transform(x_train)
 		x_valid = std_scale.transform(x_valid)
 		x_test = std_scale.transform(x_test)
-		last_element = x_valid[last_index]
+		last_element = x_valid[last_index].reshape(1, -1)
 		#random_element = std_scale.transform(np.array(random_element).reshape(1, -1))
 
 		# Perform a Logistic Regression
