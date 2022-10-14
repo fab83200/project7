@@ -100,13 +100,13 @@ form = st.form(key="my_form")
 
 with form:
 	cols=st.columns(2)
-	amt_goods_price = cols[0].number_input("What is the value of the property (USD):",  	# Name of the number_input
+	amt_goods_price = cols[0].number_input("What is the value of the property (USD)?",  	# Name of the number_input
 						   key='amt_goods_price_widget')
 	
-	down_payment = cols[1].number_input("What is amount of down payment (USD):",  			# Name of the number_input
+	down_payment = cols[1].number_input("What is amount of down payment (USD)?",  			# Name of the number_input
 						   key='down_payment_widget') 
 	
-	amt_annuity = cols[0].number_input("What is the desired credit length?", 	    		# Name of the number_input
+	amt_annuity = cols[0].number_input("What is the desired credit length (years)?", 	    		# Name of the number_input
 						   key='amt_annuity_widget',                            			# Name of the variable for the data
 						   value=20.0, 														# Sets the default value
 						   help="Choose a number between 1 and 30 years")
