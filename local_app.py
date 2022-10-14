@@ -18,7 +18,7 @@ st.set_page_config(                                                             
 st.title("💲Project 7: Local Analysis💲")
 st.header("")
 
-with st.expander("# ℹ️ - About this app", expanded=True):
+with st.expander("ℹ️ - About this app", expanded=True):
     st.write("""This API will make a prediction on loan default with parameters choosen by the user.    
 For each case, there are too many parameters needed. Therefore, we made specific assumptions and choices:
 -  Most users are only interested in 3 fields (`Value of property`, `downpayment`, `credit length`),
