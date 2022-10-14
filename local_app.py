@@ -35,27 +35,27 @@ def upload_file(file, variable):
 	If 'numeric' values for a feature are missing,
 	it is replaced by the median of that feature.
 
-    Parameters
-    ----------
-    file: str
-        The name of the csv file to upload. It must be under the root of the repository.
-    variable: str
-        The name of the variable under which the Dataframe will be stored
-    
-    Returns
-    -------
-    A pandas type DataFrame with no missing values.
-    
-    Example
-    -------
-    >>> upload_file("application_train_lite.csv", "application_train")
-    """
-    variable = pd.read_csv(file, sep=",")
-    for tr in variable.describe(include='object').columns:
-        variable[tr]=variable[tr].fillna((variable[tr].mode()))
-    for ci in variable.describe().columns:
-        variable[ci]=variable[ci].fillna((variable[ci].median()))
-    return variable
+	Parameters
+	----------
+	file: str
+	The name of the csv file to upload. It must be under the root of the repository.
+	variable: str
+	The name of the variable under which the Dataframe will be stored
+
+	Returns
+	-------
+	A pandas type DataFrame with no missing values.
+
+	Example
+	-------
+	>>> upload_file("application_train_lite.csv", "application_train")
+	"""
+	variable = pd.read_csv(file, sep=",")
+	for tr in variable.describe(include='object').columns:
+		variable[tr]=variable[tr].fillna((variable[tr].mode()))
+	for ci in variable.describe().columns:
+		variable[ci]=variable[ci].fillna((variable[ci].median()))
+	return variable
 
 def annuity_to_repayment_rate():
 	"""When a user expresses a loan amount and a yearly repayment,
