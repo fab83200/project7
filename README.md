@@ -26,7 +26,7 @@ _NOTA: All needed libraries to execute the Python code should be included in the
 
 ## Edit the app to deploy
 
-* Edit `/app.py` to customize this app to your heart's desire. :heart:
+* Edit `/local_app.py` to customize this app to your heart's desire. :heart:
 
 ## Deploy the app
 
@@ -38,6 +38,8 @@ Repository:
 Branch:
     main
 Main file path:
-    app.py
+    local_app.py
 
-Finally, click on `Deploy`
+Finally, click on `Deploy`.
+
+**Nota:** _Sometimes after `Deploy`, it doesn't load right away. Usually a simple `refresh page` F5/Ctrl+R suffice._
